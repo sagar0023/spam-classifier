@@ -3,7 +3,11 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
 ps = PorterStemmer()
-stop_words = set(stopwords.words('english'))
+try:
+    stop_words = set(nltk.corpus.stopwords.words("english"))
+except LookupError:
+    nltk.download("stopwords")
+    stop_words = set(nltk.corpus.stopwords.words("english"))
 
 def transform_text(text):
     text = text.lower()
