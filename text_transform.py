@@ -11,7 +11,11 @@ except LookupError:
 
 def transform_text(text):
     text = text.lower()
-    tokens = nltk.word_tokenize(text)
+    try:
+        tokens = nltk.word_tokenize(text)
+    except LookupError:
+        nltk.download('punkt_tab')
+        tokens = nltk.word_tokenize(text)
 
     # Filter alphanumeric, remove stopwords and punctuation, and stem
     filtered = [
